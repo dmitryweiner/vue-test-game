@@ -1,0 +1,86 @@
+{
+  "name": "vue-test-game",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest --no-cache",
+    "test:unit:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --no-cache --runInBand"
+  },
+  "dependencies": {
+    "@vue/test-utils": "1.0.0-beta.30",
+    "babel-jest": "24.9.0",
+    "cross-env": "6.0.3",
+    "jest": "24.9.0",
+    "vue": "^2.5.22",
+    "vue-jest": "3.0.5",
+    "vue-loader": "15.8.3",
+    "vue-template-compiler": "2.6.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@vue/cli-plugin-babel": "3.6.0",
+    "@vue/cli-plugin-eslint": "3.6.0",
+    "@vue/cli-service": "3.6.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "jest-matcher-vue-test-utils": "^2.0.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-unused-vars": 0,
+      "no-console": 0
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "keywords": [],
+  "description": "",
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.vue$": "vue-jest"
+    },
+    "setupFiles": [
+      "./test-setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./test-setup-matchers.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  }
+}
