@@ -15,11 +15,12 @@
     data: () => ({
       time: 0
     }),
+    created() {
+      this.$data.time = this.$props.amount;
+      this.timer = setTimeout(this.tick, TICK);
+    },
     destroyed() {
       clearTimeout(this.timer);
-    },
-    created() {
-      this.$parent.$on('start', this.start);
     },
     methods: {
       tick() {
@@ -29,11 +30,7 @@
         } else {
           this.$props.timeoutHandler();
         }
-      },
-      start() {
-        this.$data.time = this.$props.amount;
-        this.timer = setTimeout(this.tick, TICK);
-      },
+      }
     },
   };
 </script>
