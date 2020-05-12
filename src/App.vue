@@ -61,6 +61,7 @@ export default {
       //this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
+      this.$emit('start')
       this.$data.question = generateQuestion();
       this.$data.gameState = GAME_STATE_RUN;
     }
