@@ -9,7 +9,7 @@ describe("Question.vue", () => {
       propsData: { question }
     });
     expect(wrapper.text().replace(/\s/g, '')).toContain(
-      `${question.firstOperand} ${question.operator} ${question.firstOperand} = ?`.replace(/\s/g, '')
+      `${question.firstOperand} ${question.operator} ${question.secondOperand} = ?`.replace(/\s/g, '')
     );
   });
 });
