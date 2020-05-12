@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Let's play a numeric game!</h1>
-    <h3 v-if="total"> Total: {{total}} </h3>
+    <h3 v-if="total"> Total: {{right}}/{{total}} </h3>
     <Message :message="message" v-if="isStateAnswer"/>
     <Counter amount="10" :timeout-handler="timeoutHandler" v-if="isStateRun"/>
     <Question :question="question" v-if="isStateRun"/>
@@ -35,7 +35,8 @@ export default {
     question: null,
     userAnswer: "",
     message: "",
-    total: 0
+    total: 0,
+    right: 0
   }),
   computed: {
     isStateRun() {
@@ -56,11 +57,12 @@ export default {
     check(answer) {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
         this.$data.message = "Correct!";
-        this.total++;
+        this.right++;
         this.question = generateQuestion();
       } else {
         this.$data.message = "Wrong!";
       }
+      this.total++;
       this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
