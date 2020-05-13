@@ -19,7 +19,7 @@ describe("Questions service", () => {
     ${1}  | ${2}  | ${'*'}   | ${2}
     ${3}  | ${7}  | ${'*'}   | ${21}
     ${4}  | ${8}  | ${'*'}   | ${32}
-  `("should correctly check answer", ({a, b, operator, result}) => {
+  `("should correctly check answer: $a $operator $b should be $result", ({a, b, operator, result}) => {
     const question = {
       firstOperand: a,
       secondOperand: b,
