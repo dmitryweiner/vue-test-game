@@ -8,8 +8,8 @@ describe("Question.vue", () => {
     const wrapper = shallowMount(Question, {
       propsData: { question }
     });
-    expect(wrapper.text().replace(/\s/g, '')).toContain(
-      `${question.firstOperand} ${question.operator} ${question.firstOperand} = ?`.replace(/\s/g, '')
+    expect(wrapper.text().replace(/\s/g, '')).toMatch(
+      `${question.firstOperand} ${question.operator} ${question.secondOperand} = ?`.replace(/\s/g, '')
     );
   });
 });
