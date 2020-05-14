@@ -14,10 +14,9 @@ describe("Counter.vue", () => {
     });
     expect(wrapper.text()).toMatch(`Timer: ${initialAmount}`);
     expect(callback).not.toBeCalled();
-    wrapper.setProps({isRunning: true});
-    // TODO?
-    //await new Promise(resolve => setTimeout(resolve, 1100));
-    expect(wrapper.text()).toMatch(`Timer: ${initialAmount - 1}`);
+    wrapper.setProps({isStateAnswer: true});
+    await new Promise(resolve => setTimeout(resolve, 1100));
+    expect(wrapper.text()).toBe(`Timer: ${initialAmount - 1}`);
     await new Promise(resolve => setTimeout(resolve, 1100));
     expect(callback).toBeCalled();
     expect(callback).toHaveBeenCalledTimes(1);

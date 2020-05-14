@@ -13,6 +13,6 @@ describe("AnswerForm.vue", () => {
     wrapper.find('button').trigger('click');
     expect(handler).toBeCalled();
     expect(handler).toHaveBeenCalledTimes(1);
-    expect(handler).toHaveBeenCalledWith([answer]); // TODO?
+    expect(handler).toHaveBeenCalledWith([answer]); 
   });
 });
