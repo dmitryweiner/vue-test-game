@@ -49,7 +49,7 @@ export default {
   methods: {
     timeoutHandler() {
       this.$data.message = "Time is over!";
-      this.$data.gameState = GAME_STATE_IDLE;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     answerHandler(answer) {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
@@ -57,8 +57,7 @@ export default {
       } else {
         this.$data.message = "Wrong!";
       }
-      // TODO?
-      //this.$data.gameState = GAME_STATE_SHOW_ANSWER;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
       this.$data.question = generateQuestion();
