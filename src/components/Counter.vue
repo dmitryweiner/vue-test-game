@@ -31,6 +31,6 @@
           this.$props.timeoutHandler();
         }
       }
-    },
+    }
   };
 </script>
