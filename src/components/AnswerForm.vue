@@ -6,13 +6,10 @@
 </template>
 <script>
   export default {
-    props: [
-      "handler",
-    ],
     data: () => ({answer: ""}),
     methods: {
       sendAnswer() {
-        this.$props.handler(this.$data.answer);
+        this.$emit('checked',this.$data.answer);
       }
     }
   }
