@@ -4,7 +4,7 @@
     <Message :message="message" v-if="isStateAnswer"/>
     <Counter amount="10" :timeout-handler="timeoutHandler" v-if="isStateRun"/>
     <Question :question="question" v-if="isStateRun"/>
-    <AnswerForm :handler="answerHandler" v-if="isStateRun"/>
+    <AnswerForm @handler="answerHandler" v-if="isStateRun"/>
     <button v-on:click="startClicked" v-if="isStateIdle || isStateAnswer">Start game!</button>
   </div>
 </template>
