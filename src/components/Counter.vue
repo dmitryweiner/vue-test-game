@@ -1,6 +1,6 @@
 <template>
   <div>
-    Таймер: {{time}}
+    Timer: {{time}}
   </div>
 </template>
 <script>

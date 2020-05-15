@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" id="answer" v-model="answer" />
-    <button @click="sendAnswer">Ответить</button>
+    <button @click="sendAnswer">Answer</button>
   </div>
 </template>
 <script>
