@@ -1,6 +1,6 @@
 <template>
   <div>
-    Timer: {{time}}
+    Таймер: {{time}}
   </div>
 </template>
 <script>
@@ -31,6 +31,6 @@
           this.$props.timeoutHandler();
         }
       }
-    },
+    }
   };
 </script>

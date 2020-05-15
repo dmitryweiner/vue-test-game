@@ -2,10 +2,10 @@
   <div id="app">
     <h1>Let's play a numeric game!</h1>
     <Message :message="message" v-if="isStateAnswer"/>
-    <Counter amount="10" :timeout-handler="timeoutHandler"/>
+    <Counter amount="10" :timeout-handler="timeoutHandler" v-if="isStateRun"/>
     <Question :question="question" v-if="isStateRun"/>
-    <AnswerForm :handler="answerHandler" v-if="isStateRun"/>
-    <button v-on:click="startClicked" v-if="isStateIdle || isStateAnswer">Start game!</button>
+    <AnswerForm v-on:checked="check" v-if="isStateRun"/>
+    <button v-on:click="startClicked" v-if="isStateIdle || isStateAnswer">Начать игру!</button>
   </div>
 </template>
 
@@ -48,19 +48,21 @@ export default {
   },
   methods: {
     timeoutHandler() {
-      this.$data.message = "Time is over!";
+      this.$data.message = "Время вышло!";
       this.$data.gameState = GAME_STATE_IDLE;
     },
-    answerHandler(answer) {
+    check(answer) {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
-        this.$data.message = "Correct!";
+        this.$data.message = "Правильно!";
+        this.question = generateQuestion();
       } else {
-        this.$data.message = "Wrong!";
+        this.$data.message = "Не правильно!";
       }
       // TODO?
-      //this.$data.gameState = GAME_STATE_SHOW_ANSWER;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
+      this.$emit('start');
       this.$data.question = generateQuestion();
       this.$data.gameState = GAME_STATE_RUN;
     }
