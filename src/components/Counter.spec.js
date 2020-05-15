@@ -17,6 +17,7 @@ describe("Counter.vue", () => {
     wrapper.setProps({isRunning: true});
     // TODO?
     //await new Promise(resolve => setTimeout(resolve, 1100));
+    await new Promise(resolve => setTimeout(resolve, 1100));
     expect(wrapper.text()).toMatch(`Timer: ${initialAmount - 1}`);
     await new Promise(resolve => setTimeout(resolve, 1100));
     expect(callback).toBeCalled();
