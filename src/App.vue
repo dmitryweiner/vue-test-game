@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <h1>Let's play a numeric game!</h1>
-    <Message :message="message" v-if="isStateAnswer"/>
-    <Counter amount="10" :timeout-handler="timeoutHandler"/>
-    <Question :question="question" v-if="isStateRun"/>
-    <AnswerForm :handler="answerHandler" v-if="isStateRun"/>
+    <h2 v-if="total">Всего: {{total}}, Верно: {{correct}}</h2>
+    <Message :message="message" v-if="isStateAnswer" />
+    <Counter amount="10" :timeout-handler="timeoutHandler" v-if="isStateRun" />
+    <Question :question="question" v-if="isStateRun" />
+    <AnswerForm v-on:checked="check" v-if="isStateRun" />
     <button v-on:click="startClicked" v-if="isStateIdle || isStateAnswer">Start game!</button>
   </div>
 </template>
@@ -14,8 +15,8 @@ import Question from "./components/Question.vue";
 import Counter from "./components/Counter.vue";
 import AnswerForm from "./components/AnswerForm.vue";
 import Message from "./components/Message.vue";
-import {generateQuestion} from "./services/questions.js";
-import {checkAnswer} from "./services/questions";
+import { generateQuestion } from "./services/questions.js";
+import { checkAnswer } from "./services/questions";
 
 const GAME_STATE_IDLE = "idle";
 const GAME_STATE_RUN = "run";
@@ -33,7 +34,9 @@ export default {
     gameState: GAME_STATE_IDLE,
     question: null,
     userAnswer: "",
-    message: ""
+    message: "",
+    total: 0,
+    correct: 0
   }),
   computed: {
     isStateRun() {
@@ -44,27 +47,30 @@ export default {
     },
     isStateIdle() {
       return this.$data.gameState === GAME_STATE_IDLE;
-    },
+    }
   },
   methods: {
     timeoutHandler() {
       this.$data.message = "Time is over!";
       this.$data.gameState = GAME_STATE_IDLE;
     },
-    answerHandler(answer) {
+    check(answer) {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
         this.$data.message = "Correct!";
+        this.correct++;
+        this.question = generateQuestion();
       } else {
         this.$data.message = "Wrong!";
       }
       // TODO?
-      //this.$data.gameState = GAME_STATE_SHOW_ANSWER;
+      this.total++;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
       this.$data.question = generateQuestion();
       this.$data.gameState = GAME_STATE_RUN;
     }
-  },
+  }
 };
 </script>
 
