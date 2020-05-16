@@ -5,15 +5,12 @@
   </div>
 </template>
 <script>
-  export default {
-    props: [
-      "handler",
-    ],
-    data: () => ({answer: ""}),
-    methods: {
-      sendAnswer() {
-        this.$props.handler(this.$data.answer);
-      }
+export default {
+  data: () => ({ answer: "" }),
+  methods: {
+    sendAnswer() {
+      this.$emit("checked", this.$data.answer);
     }
   }
+};
 </script>
