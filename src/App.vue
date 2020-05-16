@@ -4,7 +4,7 @@
     <Message :message="message" v-if="isStateAnswer"/>
     <Counter amount="10" :timeout-handler="timeoutHandler" v-if = "isStateRun"/>
     <Question :question="question" v-if="isStateRun"/>
-    <AnswerForm :handler="answerHandler" v-if="isStateRun"/>
+    <AnswerForm @handler="answerHandler" v-if="isStateRun"/>
     <button v-on:click="startClicked" v-if="isStateIdle || isStateAnswer">Start game!</button>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   methods: {
     timeoutHandler() {
       this.$data.message = "Time is over!";
-      this.$data.gameState = GAME_STATE_IDLE;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     answerHandler(answer) {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
@@ -58,7 +58,7 @@ export default {
         this.$data.message = "Wrong!";
       }
       // TODO?
-      //this.$data.gameState = GAME_STATE_SHOW_ANSWER;
+      this.$data.gameState = GAME_STATE_SHOW_ANSWER;
     },
     startClicked() {
       this.$data.question = generateQuestion();
