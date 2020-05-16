@@ -12,7 +12,7 @@
     data: () => ({answer: ""}),
     methods: {
       sendAnswer() {
-        this.$props.handler(this.$data.answer);
+        this.$emit('handler', this.answer);
       }
     }
   }
