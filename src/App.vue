@@ -144,7 +144,7 @@ export default {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
         this.$data.answerResultMessage = 'Correct!';
         this.$data.answerResult = '';
-        this.$data.currentScrore += 100;
+        this.$data.currentScrore += 10;
 
 
         this.$data.timerTimeLimit += 2;
