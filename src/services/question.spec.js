@@ -8,23 +8,22 @@ describe("Questions service", () => {
     expect(question.operator).toMatch(/[+\-*]?/);
   });
 
-  test.each`
-    a     | b     | operator | result
-    ${1}  | ${2}  | ${'+'}   | ${3}
-    ${7}  | ${6}  | ${'+'}   | ${13}
-    ${4}  | ${2}  | ${'+'}   | ${6}
-    ${1}  | ${2}  | ${'-'}   | ${-1}
-    ${7}  | ${5}  | ${'-'}   | ${2}
-    ${10} | ${3}  | ${'-'}   | ${7}
-    ${1}  | ${2}  | ${'*'}   | ${2}
-    ${3}  | ${7}  | ${'*'}   | ${21}
-    ${4}  | ${8}  | ${'*'}   | ${32}
-  `("should correctly check answer: $a $operator $b should be $result", ({a, b, operator, result}) => {
-    const question = {
-      firstOperand: a,
-      secondOperand: b,
-      operator
-    };
-    expect(checkAnswer(question, result)).toBe(true);
+  test("should correctly check answer", () => {
+    const question = generateQuestion();
+    switch (question.operator) {
+      case "+":
+        expect(checkAnswer(question, question.firstOperand + question.secondOperand)).toBe(true);
+        expect(checkAnswer(question, question.firstOperand + question.secondOperand + 1)).toBe(false);
+        break;
+      case "-":
+        expect(checkAnswer(question, question.firstOperand - question.secondOperand)).toBe(true);
+        expect(checkAnswer(question, question.firstOperand - question.secondOperand + 1)).toBe(false);
+        break;
+      case "*":
+        expect(checkAnswer(question, question.firstOperand * question.secondOperand)).toBe(true);
+        expect(checkAnswer(question, question.firstOperand * question.secondOperand + 1)).toBe(false);
+        break;
+      default:
+    }
   });
 });
