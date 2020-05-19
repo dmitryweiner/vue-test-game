@@ -45,6 +45,7 @@ export default {
   box-sizing: border-box;
   .answer-input {
     box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
     font-size: 18px;
     width: 100%;
     height: 40px;

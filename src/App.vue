@@ -2,6 +2,7 @@
   <div id="app">
     <ScoreBord
       :currentScrore="currentScrore"
+      :scoresContainer="scoresContainer"
       :show="isScoreboardVisible"
     />
     <div class="app-container">
@@ -100,7 +101,8 @@ export default {
     warningThreshold: 0,
     alertThreshold: 0,
     currentScrore: 0,
-    isScoreboardVisible: true
+    scoresContainer: [],
+    isScoreboardVisible: false
   }),
   computed: {
     isStateRun() {
@@ -116,12 +118,14 @@ export default {
   methods: {
     resetGameTime() { // stop game when time go beyond 0
       this.$data.answerResultMessage = 'Time is over!';
+      this.$data.scoresContainer.push(this.$data.currentScrore);
+      this.$data.scoresContainer.sort((a, b) => b - a);
+      this.$data.answerResult = '';
       this.$data.isGameEndModalVisible = true;
-      // if (this.$data.answerResultMessage === 'Time is over!') {
-      //   this.$data.isScoreboardVisible = false;
-      // }
+      if (this.$data.answerResultMessage === 'Time is over!') {
+        this.$data.isScoreboardVisible = false;
+      }
       this.$data.gameState = GAME_STATE_IDLE;
-      console.log(this.$data.currentScrore);
     },
     startGameAfterTimerEnd() {
       this.$data.gameState = GAME_STATE_RUN;
@@ -135,7 +139,7 @@ export default {
       this.$data.isGameStartModalVisible = false;
       this.$data.isGameEndModalVisible = false;
       this.$data.isGameStarting = true;
-      this.$data.timerTimeLimit = 1000;
+      this.$data.timerTimeLimit = 10;
       this.$data.warningThreshold = 4;
       this.$data.alertThreshold = 2;
       this.$data.currentScrore = 0;
@@ -144,22 +148,22 @@ export default {
       if (checkAnswer(this.$data.question, Number.parseInt(answer))) {
         this.$data.answerResultMessage = 'Correct!';
         this.$data.answerResult = '';
-        this.$data.currentScrore += 10;
 
+        this.$data.currentScrore += 100;
 
         this.$data.timerTimeLimit += 2;
         this.$data.warningThreshold += 2;
         this.$data.alertThreshold += 2;
 
         setTimeout(() => {
-          this.$data.answerResultMessage = ''
+          this.$data.answerResultMessage = '';
         }, 500);
         this.$data.question = generateQuestion();
       } else {
-        if (this.$data.answerResult !== '' && this.$data.answerResultMessage === 'Wrong!') {
+        this.$data.answerResultMessage = 'Wrong!';
+        if (this.$data.answerResult !== '' && this.$data.answerResultMessage === 'Wrong!' && this.$data.currentScrore > 0) {
           this.$data.currentScrore -= 25;
         }
-        this.$data.answerResultMessage = 'Wrong!';
       }
       // TODO?
       // this.$data.gameState = GAME_STATE_SHOW_ANSWER;
@@ -207,18 +211,17 @@ export default {
 }
 
 #app {
+  font-family: 'Jost';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $Bluewood;
   padding: 0;
   margin: 0;
-  font-family: 'Jost', sans-serif;
 }
 
 html {
   width: 100%;
   height: calc(var(--vh, 1vh) * 100);
-  font-family: 'Jost', sans-serif;
 }
 
 body {
@@ -226,6 +229,5 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Jost', sans-serif;
 }
 </style>

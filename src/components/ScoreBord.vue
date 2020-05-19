@@ -11,63 +11,32 @@
       Score: {{ currentScrore }}
     </div>
     <div class="first-place score-style">
-      Top 1: {{ modifiedScoreContainer[0] }}
+      Top 1: {{ scoresContainer[0] }}
     </div>
     <div class="second-place score-style">
-      Top 2: {{ modifiedScoreContainer[1] }}
+      Top 2: {{ scoresContainer[1] }}
     </div>
     <div class="third-place score-style">
-      Top 3: {{ modifiedScoreContainer[2] }}
+      Top 3: {{ scoresContainer[2] }}
     </div>
   </div>
 </template>
 
 <script>
-let scoreContainer = [].splice(0, 3).sort((a, b) => b - a);
-
 export default {
   props: {
     currentScrore: {
       type: Number,
       default: 0
     },
+    scoresContainer: {
+      type: Array,
+      default: () => [].sort((a, b) => b - a)
+    },
     show: {
       type: Boolean,
       default: true
     }
-  },
-  data: () => ({
-    firstPlace: 0,
-    secondPlace: 0,
-    thirdPlace: 0,
-    modifiedScoreContainer: [].splice(0, 3).sort((a, b) => b - a)
-  }),
-  // data() {
-  //   return {
-  //     firstPlace: 0,
-  //     secondPlace: 0,
-  //     thirdPlace: 0,
-  //     scoreContainer: [].splice(0,3) // set array limit to three elements
-  //   }
-  // },
-  computed: {
-    updatedScoreContainer() {
-      scoreContainer.push(this.$props.currentScrore);
-      let modifiedScoreContainer = this.$data.modifiedScoreContainer
-      modifiedScoreContainer = scoreContainer
-      return modifiedScoreContainer;
-
-      // scoreContainer.push(this.$props.currentScrore);
-      // scoreContainer.sort((a, b) => b - a);
-      // let modifiedScoreContainer = this.$data.modifiedScoreContainer;
-      // modifiedScoreContainer = scoreContainer;
-      // return modifiedScoreContainer;
-    }
-  },
-  mounted() {
-    // console.log(this.$data.modifiedScoreContainer);
-    console.log(this.updatedScoreContainer);
-    console.log(this.$data.modifiedScoreContainer);
   }
 }
 </script>
@@ -77,7 +46,6 @@ export default {
   padding-top: 40px;
   padding-left: 60px;
   position: absolute;
-  font-family: 'Jost', sans-serif;
 }
 
 .current-score {

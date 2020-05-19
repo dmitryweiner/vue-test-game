@@ -1,4 +1,4 @@
-// TESTED BY DEVELOPER'S HANDS AND EYES
+// TESTED BY DEVELOPER HAND AND BLOOD
 import { shallowMount } from "@vue/test-utils";
 import Counter from "./Counter";
 
