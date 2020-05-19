@@ -1,10 +1,10 @@
 <template>
   <h4>
-    {{message}}
+    {{ message }}
   </h4>
 </template>
 <script>
   export default {
-    props: ["message"]
+    props: ['message']
   };
 </script>

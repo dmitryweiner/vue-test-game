@@ -5,16 +5,16 @@ export function generateQuestion() {
   let operator;
   switch (operatorNum) {
     case 1:
-      operator = "+";
+      operator = '+';
       break;
     case 2:
-      operator = "-";
+      operator = '-';
       break;
     case 3:
-      operator = "*";
+      operator = '*';
       break;
     default:
-      operator = "";
+      operator = '';
   }
   return {
     firstOperand,
@@ -26,13 +26,13 @@ export function generateQuestion() {
 export function checkAnswer(question, answer) {
   let result;
   switch (question.operator) {
-    case "+":
+    case '+':
       result = question.firstOperand + question.secondOperand === answer;
       break;
-    case "-":
+    case '-':
       result = question.firstOperand - question.secondOperand === answer;
       break;
-    case "*":
+    case '*':
       result = question.firstOperand * question.secondOperand === answer;
       break;
     default:
