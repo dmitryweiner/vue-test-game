@@ -1,3 +1,4 @@
+// TESTED BY DEVELOPER HAND AND BLOOD
 import { shallowMount } from "@vue/test-utils";
 import Question from "./Question.vue";
 import { generateQuestion } from "../services/questions";

@@ -1,0 +1,26 @@
+@import './colorStyles.scss';
+
+button {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 8px;
+  font-size: 28px;
+  font-weight: 500;
+  color: $Bluewood;
+  padding: 4px 20px;
+  cursor: pointer;
+  outline: #8f8f8f;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .20);
+  &:hover {
+    transition: background-color 0.4s ease-in-out;
+    background-color: #f8f8f8;
+  }
+  &:not(:hover) {
+    transition: background-color 0.4s ease-in-out;
+  }
+  &:active {
+    transition: background-color 0.2s ease-in-out;
+    background-color: #e7e7e7;
+  }
+}
